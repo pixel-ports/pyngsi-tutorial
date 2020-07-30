@@ -13107,6 +13107,7 @@ $( document ).ready(function(){
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="https://github.com/pixel-ports/pyngsi">pyngsi</a> is a Python framework that allows to write a data-acquisition pipeline for <a href="https://www.fiware.org">Fiware</a>.</p>
+<p>Documentation for old 1.x versions can be found <a href="https://pixel-ports.github.io/pyngsi-tutorial-1.2.html">here</a></p>
 
 </div>
 </div>
@@ -13114,7 +13115,7 @@ $( document ).ready(function(){
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>There are many datasources exposing various data in various ways using different protocols.<p></p>
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>Datasources are versatile exposing various data in various ways using different protocols.<p></p>
 <p>A few examples showing how datasources can be exposed :</p>
 <ul>
 <li><p>IoT sensors : WiFi IP-based or using lightweight protocols such as Bluetooth, Zigbee, Lora, 5G, ...</p>
@@ -13206,24 +13207,46 @@ For example it's possible to build NGSI entities with the framework and deal wit
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Pre-requisite">Pre-requisite<a class="anchor-link" href="#Pre-requisite">&#182;</a></h2><h3 id="Python-3.8+">Python 3.8+<a class="anchor-link" href="#Python-3.8+">&#182;</a></h3><p>As of March 2020 the latest Python stable release is v3.8.2.<br>
+<h2 id="Pre-requisite">Pre-requisite<a class="anchor-link" href="#Pre-requisite">&#182;</a></h2><h3 id="Python-3.8+">Python 3.8+<a class="anchor-link" href="#Python-3.8+">&#182;</a></h3><p>As of July 2020 the latest Python stable release is v3.8.5.<br>
 It is available on all platforms.<br>
 Depending on your OS iy may be already installed.<br>
 If not you'll have to install it.</p>
 <p>You can check the version either from the terminal :</p>
 <div class="highlight"><pre><span></span>$ python --version
-Python <span class="m">3</span>.8.2
+Python <span class="m">3</span>.8.5
 </pre></div>
 <p>or in Python code :</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>                                                                                                           
-<span class="mf">3.8</span><span class="o">.</span><span class="mi">2</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Feb</span> <span class="mi">26</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">02</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mi">10</span><span class="p">)</span> 
-<span class="p">[</span><span class="n">GCC</span> <span class="mf">7.4</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span>
+<span class="mf">3.8</span><span class="o">.</span><span class="mi">5</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span> <span class="mi">20</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">19</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">14</span><span class="p">)</span> 
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">7.5</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Check-your-pyngsi-version">Check your pyngsi version<a class="anchor-link" href="#Check-your-pyngsi-version">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pyngsi</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pyngsi</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13243,7 +13266,7 @@ Python <span class="m">3</span>.8.2
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's assume you have collected incoming data.<br>
-For the sake of this tutorial, let's say data are collected from temperature/pressure sensors located in many rooms.<br>
+For the sake of this tutorial, let's say data are collected from temperature/pressure sensors located in some rooms.<br>
 At some point these data are stored in memory and handled as Python variables or objects.<br>
 Now you are ready to translate your data to <a href="https://fiware.github.io/specifications/ngsiv2/stable/">NGSI</a>-compliant entities in order to further write them to <a href="https://fiware-orion.readthedocs.io/en/master/">Orion</a>, hence completing the <a href="https://www.fiware.org/">Fiware</a>-based data acquisition pipeline.<br>
 Please use <a href="https://fiware-datamodels.readthedocs.io/en/latest/">existing Fiware datamodels</a> or extend them.<br>
@@ -13435,7 +13458,7 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <tr>
 <td style="text-align:left">DateTime</td>
 <td style="text-align:left">datetime</td>
-<td style="text-align:left">str <em>(isdate=True)</em></td>
+<td style="text-align:left">str : <em>add_date()</em></td>
 </tr>
 <tr>
 <td style="text-align:left">geo:json</td>
@@ -13445,7 +13468,7 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <tr>
 <td style="text-align:left">URL</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">str <em>(isurl=True)</em></td>
+<td style="text-align:left">str : <em>add_url()</em></td>
 </tr>
 <tr>
 <td style="text-align:left">STRING_URL_ENCODED</td>
@@ -13495,7 +13518,7 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># if you already have a datetime as a well-formatted string, you can use it directly</span>
-<span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">,</span> <span class="s2">&quot;2020-02-27T04:52:53:000Z&quot;</span><span class="p">,</span> <span class="n">isdate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_date</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">,</span> <span class="s2">&quot;2020-02-27T04:52:53:000Z&quot;</span><span class="p">)</span>
 
 <span class="c1"># note that adding an already existing attribute replaces the value</span>
 <span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
@@ -13666,13 +13689,10 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.__init__</span> <span class="kn">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">version</span>
+<span class="kn">from</span> <span class="nn">pyngsi.ngsi</span> <span class="kn">import</span> <span class="n">DataModel</span>
+
 <span class="c1"># provide a dictionary</span>
 <span class="n">unit</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;unitCode&quot;</span><span class="p">:</span> <span class="s2">&quot;Pa&quot;</span><span class="p">}</span>
-
-
-
-<span class="nb">print</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
-<span class="n">help</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">)</span>
 
 <span class="n">m</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;Room2&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;Room&quot;</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;pressure&quot;</span><span class="p">,</span> <span class="mi">720</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">unit</span><span class="p">)</span>
@@ -13736,7 +13756,7 @@ The datamodel used here extends the Fiware <a href="https://fiware-datamodels.re
 <span class="n">provider</span> <span class="o">=</span> <span class="mi">20430</span> <span class="c1"># sensor id</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">-WeatherObserved-Sencrop-</span><span class="si">{</span><span class="n">provider</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">date</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;WeatherObserved&quot;</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dataProvider&quot;</span><span class="p">,</span> <span class="s2">&quot;https://app.sencrop.com&quot;</span><span class="p">,</span> <span class="n">isurl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_url</span><span class="p">(</span><span class="s2">&quot;dataProvider&quot;</span><span class="p">,</span> <span class="s2">&quot;https://app.sencrop.com&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;address&quot;</span><span class="p">,</span> <span class="s2">&quot;Port of Bassens&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;refDevice&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;device-sencrop-</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">provider</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">isdate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -13745,6 +13765,19 @@ The datamodel used here extends the Fiware <a href="https://fiware-datamodels.re
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;windDirection&quot;</span><span class="p">,</span> <span class="mf">59.0</span><span class="p">)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
     </div>
@@ -14033,7 +14066,7 @@ Many generic sources are provided by the framework and it's easy to create a new
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-Source-strongly-encourages-to-stream-incoming-data">The Source strongly encourages to stream incoming data<a class="anchor-link" href="#The-Source-strongly-encourages-to-stream-incoming-data">&#182;</a></h3><p>Whatever the size of the dataset, memory will never ne an issue.</p>
+<h3 id="The-Source-strongly-encourages-to-stream-incoming-data">The Source strongly encourages to stream incoming data<a class="anchor-link" href="#The-Source-strongly-encourages-to-stream-incoming-data">&#182;</a></h3><p>Whatever the size of the dataset, memory will never be an issue.</p>
 
 </div>
 </div>
@@ -14059,7 +14092,7 @@ Many generic sources are provided by the framework and it's easy to create a new
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># this source provides us with a CSV line each second</span>
-<span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">SourceSampleOrion</span>
+<span class="kn">from</span> <span class="nn">pyngsi.sources.more_sources</span> <span class="kn">import</span> <span class="n">SourceSampleOrion</span>
 
 <span class="c1"># init the source</span>
 <span class="n">src</span> <span class="o">=</span> <span class="n">SourceSampleOrion</span><span class="p">()</span>
@@ -14117,7 +14150,7 @@ It also needs a function in order to convert incoming rows to NGSI entities.<p><
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">SourceSampleOrion</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.more_sources</span> <span class="kn">import</span> <span class="n">SourceSampleOrion</span>
 <span class="kn">from</span> <span class="nn">pyngsi.sink</span> <span class="kn">import</span> <span class="n">SinkStdout</span>
 <span class="kn">from</span> <span class="nn">pyngsi.agent</span> <span class="kn">import</span> <span class="n">NgsiAgent</span>
 
@@ -14155,7 +14188,7 @@ But SinkOrion expects valid NGSI entities on its input.<p></p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">Row</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.source</span> <span class="kn">import</span> <span class="n">Row</span>
 <span class="kn">from</span> <span class="nn">pyngsi.ngsi</span> <span class="kn">import</span> <span class="n">DataModel</span>
 
 <span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="n">Row</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataModel</span><span class="p">:</span>
@@ -14331,7 +14364,7 @@ Principles remain the same when things become more complex.</p>
 As datasources have very little in common, the only assumption made by the framework is :<br></p>
 <p><strong>Every datasource is iterable</strong><br></p>
 <p>In practical terms, a Source uses a Python generator.<br>
-The <em>pyngsi.source</em> package offers many generic sources, and it's easy to create your custom Source by extending the Source class.<p></p>
+The <em>pyngsi.sources</em> package offers many generic sources, and it's easy to create your custom Source by extending the Source class.<p></p>
 <p>A Source iterates over rows.<br>
 Rows are composed of two parts :</p>
 <ul>
@@ -14356,7 +14389,7 @@ This common interface will allow us to create agents that will use our Sources, 
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">Row</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.source</span> <span class="kn">import</span> <span class="n">Row</span>
 
 <span class="n">help</span><span class="p">(</span><span class="n">Row</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
 </pre></div>
@@ -14373,40 +14406,47 @@ This common interface will allow us to create agents that will use our Sources, 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pyngsi.source</span>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sources are provided in the <code>pyngsi.sources</code> package.<p>
+The <code>Source</code> base class as well as the <code>Row</code> class are defined in <code>pyngsi.sources.source</code>.</p>
 
-<span class="nb">print</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">pyngsi</span><span class="o">.</span><span class="n">source</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;Source&quot;</span><span class="p">)])</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><p>Source is the Source base class</p>
+<li><p><code>Source</code> is the Source base class</p>
 </li>
-<li><p>SourceSampleOrion is the Source dedicated to the tutorial</p>
+<li><p><code>SourceStream</code> takes incoming plain text data from any iterable input : may be an opened file descriptor or any Python sequence such as a list or a tuple</p>
 </li>
-<li><p>SourceStdin takes incoming data from standard input</p>
+<li><p><code>SourceSdtin</code> is a shortcut for SourceStream(sys.stdin) and takes data from the standard input</p>
 </li>
-<li><p>SourceFile takes incoming data from a local file (supports zip &amp; gzip compression)</p>
+<li><p><code>SourceSingle</code> takes incoming data from a single (non-iterable) element</p>
 </li>
-<li><p>SourceJson takes JSON incoming data, from stdin or from a file (supports zip &amp; gzip compression).<br>
+<li><p><code>SourceMany</code> combines many sources</p>
+</li>
+<li><p><code>SourceJson</code> takes incoming JSON data from a JSON string<br>
 If the incoming JSON is a JSON Array then SourceJson iterates over the array<br>
-The constructor <code>path</code> argument points the array to be iterated in the JSON structure (i.e. path = ["cars","models"])</p>
+The <code>jsonpath</code> argument points the array to be iterated in the JSON structure (i.e. path = ["cars","models"])</p>
 </li>
-<li><p>SourceIter takes incoming data from any Python Sequence argument (list, tuple, ...) provided to the constuctor</p>
+<li><p><code>SourceSampleOrion</code> is the Source dedicated to the tutorial found in the <a href="https://fiware-orion.readthedocs.io/en/master/user/walkthrough_apiv2/index.html#entity-creation">Orion walkthrough</a></p>
 </li>
-<li><p>SourceSingle takes incoming data from the argument provided to the constuctor</p>
+<li><p><code>SourceMicrosoftExcel</code> is a Source that can read xlsx files<br>
+It is given as an example to write your own custom Source classes</p>
+</li>
+<li><p><code>SourceFtp</code> retrieves incoming data from FTP servers</p>
+</li>
+<li><p><code>Server</code> is a base class for Sources acting as a server<br>
+This kind of datasources are not requested by the Agent</p>
+</li>
+<li><p><code>ServerHttpUpload</code> is an HTTP server<br>
+Each time it receives content on its <code>upload</code> endpoint, it acts as a Source that feeds data to the Agent</p>
+</li>
+<li><p><code>ServerUdp</code> is an UDP server<br></p>
 </li>
 </ul>
 
@@ -14435,10 +14475,10 @@ The provider is filled with the name of the file.</p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">Source</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.source</span> <span class="kn">import</span> <span class="n">Source</span>
 
 <span class="c1"># returns a SourceJson guessed from the extension</span>
-<span class="n">src</span> <span class="o">=</span> <span class="n">Source</span><span class="o">.</span><span class="n">create_source_from_file</span><span class="p">(</span><span class="s2">&quot;files/colors.json.gz&quot;</span><span class="p">)</span>
+<span class="n">src</span> <span class="o">=</span> <span class="n">Source</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;files/colors.json.gz&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">src</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
@@ -14448,6 +14488,14 @@ The provider is filled with the name of the file.</p>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To process local files in batch mode, you may also use <code>from_files()</code>, <code>from_glob()</code> and <code>from_globs()</code>.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -14484,7 +14532,7 @@ We will focus only on RFC958 and RFC2228 speaking about the FTP protocol.</p>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">Row</span>
+<span class="kn">from</span> <span class="nn">pyngsi.sources.source</span> <span class="kn">import</span> <span class="n">Row</span>
 <span class="kn">from</span> <span class="nn">pyngsi.ngsi</span> <span class="kn">import</span> <span class="n">DataModel</span>
 
 <span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="n">Row</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataModel</span><span class="p">:</span>
@@ -14514,7 +14562,7 @@ We will focus only on RFC958 and RFC2228 speaking about the FTP protocol.</p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">SourceFtp</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.source_ftp</span> <span class="kn">import</span> <span class="n">SourceFtp</span>
 <span class="kn">from</span> <span class="nn">pyngsi.sink</span> <span class="kn">import</span> <span class="n">SinkStdout</span>
 <span class="kn">from</span> <span class="nn">pyngsi.agent</span> <span class="kn">import</span> <span class="n">NgsiAgent</span>
 
@@ -14574,7 +14622,7 @@ From the datasource point of view we could also call that push mode.<p></p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">Row</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.source</span> <span class="kn">import</span> <span class="n">Row</span>
 <span class="kn">from</span> <span class="nn">pyngsi.ngsi</span> <span class="kn">import</span> <span class="n">DataModel</span>
 
 <span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="n">Row</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataModel</span><span class="p">:</span>
@@ -14600,7 +14648,7 @@ From the datasource point of view we could also call that push mode.<p></p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.server</span> <span class="kn">import</span> <span class="n">ServerHttpUpload</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.server</span> <span class="kn">import</span> <span class="n">ServerHttpUpload</span>
 <span class="kn">from</span> <span class="nn">pyngsi.sink</span> <span class="kn">import</span> <span class="n">SinkOrion</span>
 <span class="kn">from</span> <span class="nn">pyngsi.agent</span> <span class="kn">import</span> <span class="n">NgsiAgent</span>
 
@@ -14645,7 +14693,7 @@ From the datasource point of view we could also call that push mode.<p></p>
 
 <pre><code>{
   "name": "pyngsi",
-  "version": "1.2.6"
+  "version": "2.0.0"
 }</code></pre>
 <ul>
 <li><strong>/status</strong> : get status and consolidated statistics</li>
@@ -14692,7 +14740,7 @@ In practice it is based on a Python generator.</p>
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">Source</span><span class="p">,</span> <span class="n">Row</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.source</span> <span class="kn">import</span> <span class="n">Source</span><span class="p">,</span> <span class="n">Row</span>
 
 <span class="k">class</span> <span class="nc">CustomSource</span><span class="p">(</span><span class="n">Source</span><span class="p">):</span> 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rooms</span><span class="p">):</span> 
@@ -14824,7 +14872,7 @@ In practice it is based on a Python generator.</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.ngsi</span> <span class="kn">import</span> <span class="n">DataModel</span>
-<span class="kn">from</span> <span class="nn">pyngsi.source</span> <span class="kn">import</span> <span class="n">SourceSingle</span><span class="p">,</span> <span class="n">Row</span>
+<span class="kn">from</span> <span class="nn">pyngsi.sources.source</span> <span class="kn">import</span> <span class="n">SourceSingle</span><span class="p">,</span> <span class="n">Row</span>
 <span class="kn">from</span> <span class="nn">pyngsi.sink</span> <span class="kn">import</span> <span class="n">SinkStdout</span>
 <span class="kn">from</span> <span class="nn">pyngsi.agent</span> <span class="kn">import</span> <span class="n">NgsiAgent</span>
 
@@ -14876,7 +14924,7 @@ In practice it is based on a Python generator.</p>
 
 <pre><code>{
   "name": "pyngsi",
-  "version": "1.2.3"
+  "version": "2.0.0"
 }</code></pre>
 <ul>
 <li><strong>/status</strong> : get status and consolidated statistics</li>
@@ -15017,7 +15065,6 @@ A clean solution is to use a simple class to hold your context.</p>
         <span class="n">model</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;dummy&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dataProvider&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">provider</span><span class="p">,</span> <span class="n">isurl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;address&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">anyvalue</span><span class="p">)</span> 
-        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;address&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">anyvalue</span><span class="p">)</span> 
         <span class="k">return</span> <span class="n">m</span>
 </pre></div>
 <p>Then in the code of the Agent you can use the processor like this :</p>
@@ -15095,10 +15142,108 @@ Thanks to <em>pyngsi</em> you can quickly create a SourceTest to mock your real 
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One can add Sources or Sinks into the framework.<br>
+<p>One can add Sources and Sinks to the framework.<br>
 Just extend the corresponding classes.<p></p>
-<p>You can add a Source that is dedicated to your custom data and your custom agent.<br>
-If you wish to add a Source generic Source that could be reused in other agents, please consider contributing to the project.</p>
+<p>You can add a Source that is dedicated to your custom data and your custom agent.<p></p>
+<p><code>SourceMicrosoftExcel</code> is given as an example.<br>
+Let's say you've just created your own Source capable of parsing xlsx files and yielding CSV-like rows from it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.more_sources</span> <span class="kn">import</span> <span class="n">SourceMicrosoftExcel</span>
+
+<span class="n">src</span> <span class="o">=</span> <span class="n">SourceMicrosoftExcel</span><span class="p">(</span><span class="s2">&quot;files/room.xlsx&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">src</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now you'd like to use it in all situations, especially if the xlsx files you're interested in are remotely.<br>
+You'll have to register the source.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.more_sources</span> <span class="kn">import</span> <span class="n">SourceMicrosoftExcel</span>
+
+<span class="c1"># global registering</span>
+<span class="n">Source</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">SourceMicrosoftExcel</span><span class="p">)</span>
+
+<span class="c1"># for the purpose of the tutorial the file room.xlsx is stored locally</span>
+<span class="n">src</span> <span class="o">=</span> <span class="n">Source</span><span class="o">.</span><span class="n">from_glob</span><span class="p">(</span><span class="s2">&quot;files/*.xlsx&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">src</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="n">Source</span><span class="o">.</span><span class="n">unregister</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As an alternative you might want to register only the xlsx extension, allowing to handle multiple formats at the same time.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.sources.source</span> <span class="kn">import</span> <span class="n">Source</span>
+<span class="kn">from</span> <span class="nn">pyngsi.sources.more_sources</span> <span class="kn">import</span> <span class="n">SourceMicrosoftExcel</span>
+
+<span class="c1"># register extension</span>
+<span class="n">Source</span><span class="o">.</span><span class="n">register_extension</span><span class="p">(</span><span class="s2">&quot;xlsx&quot;</span><span class="p">,</span> <span class="n">SourceMicrosoftExcel</span><span class="p">)</span>
+
+<span class="c1"># for the purpose of the tutorial the files room.xlsx and room.csv are stored locally</span>
+<span class="n">src</span> <span class="o">=</span> <span class="n">Source</span><span class="o">.</span><span class="n">from_glob</span><span class="p">(</span><span class="s2">&quot;files/room.*&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">src</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you wish to add a generic Source that could be reused in other agents, please consider contributing to the project.</p>
 
 </div>
 </div>

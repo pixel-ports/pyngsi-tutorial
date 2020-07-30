@@ -1,1 +1,1 @@
-pyngsi
+pyngsi>=2.0.0
