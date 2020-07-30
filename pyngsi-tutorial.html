@@ -13574,6 +13574,30 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Relationship-attribute">Relationship attribute<a class="anchor-link" href="#Relationship-attribute">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a relationShip attribute</span>
+<span class="c1"># the &quot;ref&quot; prefix is mandatory</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_relationship</span><span class="p">(</span><span class="s2">&quot;refStore&quot;</span><span class="p">,</span> <span class="s2">&quot;Shelf&quot;</span><span class="p">,</span> <span class="s2">&quot;001&quot;</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Advanced-usage">Advanced usage<a class="anchor-link" href="#Advanced-usage">&#182;</a></h2>
 </div>
 </div>
@@ -14223,6 +14247,36 @@ For example, if you're not interested in Room3 you could write this function.</p
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-side_effect()-function">The side_effect() function<a class="anchor-link" href="#The-side_effect()-function">&#182;</a></h3><p>As of v1.2.5 the Agent takes the <code>side_effect()</code> function as an optional argument.<br>
+That function will allow to create entities aside of the main flow. Few use cases might need it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">side_effect</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="c1"># we can use as an input the current row or the model returned by our process() function</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Building:MainBuilding:Room:</span><span class="si">{</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;Room&quot;</span><span class="p">)</span>
+    <span class="n">sink</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="c1"># number of entities created in the function</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">NgsiAgent</span><span class="o">.</span><span class="n">create_agent</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">sink</span><span class="p">,</span> <span class="n">process</span><span class="o">=</span><span class="n">build_entity</span><span class="p">,</span> <span class="n">side_effect</span><span class="o">=</span><span class="n">side_effect</span><span class="p">)</span>
+<span class="n">agent</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">stats</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2>
 </div>
 </div>
@@ -14347,7 +14401,8 @@ This common interface will allow us to create agents that will use our Sources, 
 <li><p>SourceFile takes incoming data from a local file (supports zip &amp; gzip compression)</p>
 </li>
 <li><p>SourceJson takes JSON incoming data, from stdin or from a file (supports zip &amp; gzip compression).<br>
-If the incoming JSON is a JSON Array then SourceJson iterates over the array</p>
+If the incoming JSON is a JSON Array then SourceJson iterates over the array<br>
+The constructor <code>path</code> argument points the array to be iterated in the JSON structure (i.e. path = ["cars","models"])</p>
 </li>
 <li><p>SourceIter takes incoming data from any Python Sequence argument (list, tuple, ...) provided to the constuctor</p>
 </li>
@@ -14575,7 +14630,7 @@ From the datasource point of view we could also call that push mode.<p></p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span>$ curl -X POST -H <span class="s2">&quot;Content-Type: application/json&quot;</span> -d <span class="s1">&#39;{&quot;room&quot;:&quot;Room1&quot;,&quot;temperature&quot;:23.0,&quot;pressure&quot;:710}&#39;</span> http://127.0.0.1:8080/upload
+<div class="highlight"><pre><span></span>$ curl -X POST -H <span class="s2">&quot;Content-Type: application/json&quot;</span> -d <span class="s1">&#39;{&quot;room&quot;:&quot;Room1&quot;,&quot;temperature&quot;:23.0,&quot;pressure&quot;:710}&#39;</span> http://127.0.0.1:8880/upload
 </pre></div>
 
 </div>
@@ -14590,7 +14645,7 @@ From the datasource point of view we could also call that push mode.<p></p>
 
 <pre><code>{
   "name": "pyngsi",
-  "version": "1.2.3"
+  "version": "1.2.6"
 }</code></pre>
 <ul>
 <li><strong>/status</strong> : get status and consolidated statistics</li>
