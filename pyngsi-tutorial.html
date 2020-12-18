@@ -13207,19 +13207,19 @@ For example it's possible to build NGSI entities with the framework and deal wit
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Pre-requisite">Pre-requisite<a class="anchor-link" href="#Pre-requisite">&#182;</a></h2><h3 id="Python-3.8+">Python 3.8+<a class="anchor-link" href="#Python-3.8+">&#182;</a></h3><p>As of July 2020 the latest Python stable release is v3.8.5.<br>
-It is available on all platforms.<br>
+<h2 id="Pre-requisite">Pre-requisite<a class="anchor-link" href="#Pre-requisite">&#182;</a></h2><h3 id="Python-3.8+">Python 3.8+<a class="anchor-link" href="#Python-3.8+">&#182;</a></h3><p>As of December 2020 the latest Python stable release is v3.9.1.<br>
+Python 3.8+ should be available on most platforms.<br>
 Depending on your OS iy may be already installed.<br>
 If not you'll have to install it.</p>
 <p>You can check the version either from the terminal :</p>
 <div class="highlight"><pre><span></span>$ python --version
-Python <span class="m">3</span>.8.5
+Python <span class="m">3</span>.8.6
 </pre></div>
 <p>or in Python code :</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>                                                                                                           
-<span class="mf">3.8</span><span class="o">.</span><span class="mi">5</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Jul</span> <span class="mi">20</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">19</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">14</span><span class="p">)</span> 
+<span class="mf">3.8</span><span class="o">.</span><span class="mi">6</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Oct</span>  <span class="mi">6</span> <span class="mi">2020</span><span class="p">,</span> <span class="mi">03</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">36</span><span class="p">)</span> 
 <span class="p">[</span><span class="n">GCC</span> <span class="mf">7.5</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
@@ -13480,6 +13480,11 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <td style="text-align:left"></td>
 <td style="text-align:left">Sequence</td>
 </tr>
+<tr>
+<td style="text-align:left">json dictionary</td>
+<td style="text-align:left">dict</td>
+<td style="text-align:left"></td>
+</tr>
 </tbody>
 </table>
 
@@ -13489,7 +13494,7 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Datetime-attribute">Datetime attribute<a class="anchor-link" href="#Datetime-attribute">&#182;</a></h3>
+<h3 id="DateTime-attribute">DateTime attribute<a class="anchor-link" href="#DateTime-attribute">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13501,8 +13506,25 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a dateObserved attribute</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="c1"># Orion expects UTC dates</span>
 <span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">,</span> <span class="n">now</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># a one-liner for dealing with the current date (as above)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">add_now</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">)</span> <span class="c1"># overwrites the dateObserved attribute</span>
 
 <span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
 </pre></div>
@@ -13584,7 +13606,7 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create a dataProvider attribute</span>
-<span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dataProvider&quot;</span><span class="p">,</span> <span class="s2">&quot;https://app.sencrop.com&quot;</span><span class="p">,</span> <span class="n">isurl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_url</span><span class="p">(</span><span class="s2">&quot;dataProvider&quot;</span><span class="p">,</span> <span class="s2">&quot;https://app.sencrop.com&quot;</span><span class="p">)</span>
 
 <span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
 </pre></div>
@@ -13679,6 +13701,56 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Adding-a-JSON-dictionary">Adding a JSON dictionary<a class="anchor-link" href="#Adding-a-JSON-dictionary">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># create an attribute containing a basic json array</span>
+<span class="c1"># just provide a Python Sequence type, here a list</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;people&quot;</span><span class="p">,</span>  <span class="p">{</span><span class="s2">&quot;firstname&quot;</span><span class="p">:</span> <span class="s2">&quot;Tom&quot;</span><span class="p">,</span> <span class="s2">&quot;lastname&quot;</span><span class="p">:</span> <span class="s2">&quot;Cruise&quot;</span><span class="p">,</span>  <span class="s2">&quot;occupation&quot;</span><span class="p">:</span> <span class="s2">&quot;Actor&quot;</span><span class="p">})</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Adding-a-postal-address">Adding a postal address<a class="anchor-link" href="#Adding-a-postal-address">&#182;</a></h3><p>A postal address is a dedicated dictionary with property and type already set</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">addr</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;addressLocality&quot;</span><span class="p">:</span> <span class="s2">&quot;London&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;postalCode&quot;</span><span class="p">:</span> <span class="s2">&quot;EC4N 8AF&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;streetAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;25 Walbrook&quot;</span><span class="p">}</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_address</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Adding-metadata">Adding metadata<a class="anchor-link" href="#Adding-metadata">&#182;</a></h3>
 </div>
 </div>
@@ -13688,10 +13760,7 @@ If any of them fit your needs then consider creating your own datamodel and subm
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyngsi.__init__</span> <span class="kn">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">version</span>
-<span class="kn">from</span> <span class="nn">pyngsi.ngsi</span> <span class="kn">import</span> <span class="n">DataModel</span>
-
-<span class="c1"># provide a dictionary</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># provide a dictionary</span>
 <span class="n">unit</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;unitCode&quot;</span><span class="p">:</span> <span class="s2">&quot;Pa&quot;</span><span class="p">}</span>
 
 <span class="n">m</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;Room2&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;Room&quot;</span><span class="p">)</span>
@@ -13759,7 +13828,7 @@ The datamodel used here extends the Fiware <a href="https://fiware-datamodels.re
 <span class="n">model</span><span class="o">.</span><span class="n">add_url</span><span class="p">(</span><span class="s2">&quot;dataProvider&quot;</span><span class="p">,</span> <span class="s2">&quot;https://app.sencrop.com&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;address&quot;</span><span class="p">,</span> <span class="s2">&quot;Port of Bassens&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;refDevice&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;device-sencrop-</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">provider</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">isdate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_date</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;windSpeed&quot;</span><span class="p">,</span> <span class="mf">3.75</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;windGust&quot;</span><span class="p">,</span> <span class="mf">7.08</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;windDirection&quot;</span><span class="p">,</span> <span class="mf">59.0</span><span class="p">)</span>
@@ -13815,11 +13884,11 @@ Let's continue with the tutorial of the previous chapter.</p>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># our basic NGSI entity from the previous chapter</span>
 
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">timezone</span>
 <span class="kn">from</span> <span class="nn">pyngsi.ngsi</span> <span class="kn">import</span> <span class="n">DataModel</span>
 
 <span class="n">m</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;Room1&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;Room&quot;</span><span class="p">)</span>
-<span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_now</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;pressure&quot;</span><span class="p">,</span> <span class="mi">720</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="mf">23.0</span><span class="p">)</span>
 
@@ -13955,7 +14024,7 @@ If not you could run your own local Docker-based server, as described in the App
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># update our entity : one degree more !</span>
-<span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_now</span><span class="p">(</span><span class="s2">&quot;dateObserved&quot;</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="mf">24.0</span><span class="p">)</span>
 
 <span class="c1"># write again</span>
@@ -13976,6 +14045,71 @@ If not you could run your own local Docker-based server, as described in the App
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Transient-entities">Transient entities<a class="anchor-link" href="#Transient-entities">&#182;</a></h2><p><a href="https://fiware-orion.readthedocs.io/en/master/user/transient_entities/index.html">Transient entities</a> are entities carrying an expire timestamp in order for Orion to delete the entity when time is over.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">expiration_timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_transient</span><span class="p">(</span><span class="n">expire</span><span class="o">=</span><span class="n">expiration_timestamp</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use a TTL instead of an expire timestamp</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_transient</span><span class="p">(</span><span class="mi">10</span><span class="o">*</span><span class="mi">86400</span><span class="p">)</span> <span class="c1"># TTL in seconds</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Apply-automatically-the-TTL-mechanism-to-all-entities">Apply automatically the TTL mechanism to all entities<a class="anchor-link" href="#Apply-automatically-the-TTL-mechanism-to-all-entities">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">DataModel</span><span class="o">.</span><span class="n">set_transient</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mi">86400</span><span class="p">)</span> <span class="c1"># TTL = 10 days</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="c1"># automatically add the dateExpires attribute at entity creation</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+
+<span class="n">DataModel</span><span class="o">.</span><span class="n">unset_transient</span><span class="p">()</span> <span class="c1"># back to default (no TTL)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -14693,7 +14827,7 @@ From the datasource point of view we could also call that push mode.<p></p>
 
 <pre><code>{
   "name": "pyngsi",
-  "version": "2.0.0"
+  "version": "2.1.0"
 }</code></pre>
 <ul>
 <li><strong>/status</strong> : get status and consolidated statistics</li>
@@ -14924,7 +15058,7 @@ In practice it is based on a Python generator.</p>
 
 <pre><code>{
   "name": "pyngsi",
-  "version": "2.0.0"
+  "version": "2.1.0"
 }</code></pre>
 <ul>
 <li><strong>/status</strong> : get status and consolidated statistics</li>
@@ -15063,7 +15197,7 @@ A clean solution is to use a simple class to hold your context.</p>
     <span class="k">def</span> <span class="nf">build_entity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="n">Row</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataModel</span><span class="p">:</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">record</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;dummy&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;dummy&quot;</span><span class="p">)</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;dataProvider&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">provider</span><span class="p">,</span> <span class="n">isurl</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add_url</span><span class="p">(</span><span class="s2">&quot;dataProvider&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">provider</span><span class="p">)</span>
         <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;address&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">anyvalue</span><span class="p">)</span> 
         <span class="k">return</span> <span class="n">m</span>
 </pre></div>
